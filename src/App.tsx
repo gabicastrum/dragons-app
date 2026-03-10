@@ -9,7 +9,6 @@ function App() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
-  // TODO: mock para teste visual, retirar na implementacao
   const dragao: IDragon = {
     id: '1',
     name: 'Banguela',
