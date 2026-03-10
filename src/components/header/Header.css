@@ -1,0 +1,23 @@
+.header {
+    background-color: rgb(206, 81, 8);
+    border-bottom: 1px solid rgb(120, 2, 255);
+    padding: 1rem 0;
+}
+
+.logo-titulo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 12px;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+}
+
+.logo-titulo h1 {
+  font-size: 1.25rem;
+  color: var(--primary);
+}
