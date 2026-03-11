@@ -1,6 +1,7 @@
 import { Header } from "../../components/header/Header";
 import { DragonCard } from '../../components/dragon-card/DragonCard';
 import { type IDragon } from '../../interfaces/dragon';
+import { useAuth } from "../../hooks/useAuth";
 
 function ListPage() {
 
@@ -15,6 +16,8 @@ function ListPage() {
   const handleEdit = (id: string) => console.log("Editando:", id);
   const handleDelete = (id: string) => console.log("Excluindo:", id);
   const handleViewDetails = (id: string) => console.log("Detalhes:", id);
+
+    const { logout } = useAuth();
 
   return (
     <div>
@@ -31,6 +34,9 @@ function ListPage() {
           />
         </section>
       </main>
+       <button onClick={logout}>
+        Sair
+      </button>
     </div>
   );
 }
