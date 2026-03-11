@@ -2,6 +2,7 @@ import { Header } from "../../components/header/Header";
 import { DragonCard } from '../../components/dragon-card/DragonCard';
 import { type IDragon } from '../../interfaces/dragon';
 import { useAuth } from "../../hooks/useAuth";
+import { Button } from "../../components/button/Button";
 
 function ListPage() {
 
@@ -34,9 +35,9 @@ function ListPage() {
           />
         </section>
       </main>
-       <button onClick={logout}>
+       <Button type="submit" onClick={logout}>
         Sair
-      </button>
+      </Button>
     </div>
   );
 }

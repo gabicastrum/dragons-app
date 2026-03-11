@@ -1,10 +1,9 @@
-import { useState, type SubmitEventHandler } from "react";
+import { useState, type SubmitEventHandler, type ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { Input } from "../../components/input/Input";
 import { Header } from "../../components/header/Header";
 import { Button } from "../../components/button/Button";
-
 
 export default function LoginPage() {
 
@@ -13,6 +12,14 @@ export default function LoginPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value);
+  };
 
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -24,19 +31,14 @@ export default function LoginPage() {
     } else {
       alert("Usuário ou senha inválidos");
     }
-  }
+  };
 
   return (
     <div>
-
       <Header />
-
       <main className="container">
-
         <section>
-
           <h1>Bem-vindo ao App dos Dragões!</h1>
-
           <form onSubmit={handleSubmit}>
 
             <Input
@@ -44,7 +46,7 @@ export default function LoginPage() {
               type="email"
               placeholder="exemplo@dragao.com"
               value={email}
-              onChange={(evento) => setEmail(evento.target.value)}
+              onChange={handleEmailChange}
             />
 
             <Input
@@ -52,7 +54,7 @@ export default function LoginPage() {
               type="password"
               placeholder="SenhaForte@123"
               value={password}
-              onChange={(evento) => setPassword(evento.target.value)}
+              onChange={handlePasswordChange}
             />
 
             <Button
@@ -63,11 +65,8 @@ export default function LoginPage() {
             </Button>
 
           </form>
-
         </section>
-
       </main>
-
     </div>
   );
 }
