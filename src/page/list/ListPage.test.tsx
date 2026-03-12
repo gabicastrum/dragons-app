@@ -1,7 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import ListPage from "./ListPage";
 import { type IDragon } from "../../interfaces/dragon";
+import { renderWithProviders } from "../../test/utils/customRender";
 
 const mockListarDragoes = vi.fn();
 
@@ -37,7 +38,7 @@ describe("ListPage", () => {
 
     mockListarDragoes.mockResolvedValue(dragoesMock);
 
-    render(<ListPage />);
+    renderWithProviders(<ListPage />);
 
     const cards = await screen.findAllByTestId("dragon-card");
 
@@ -53,7 +54,7 @@ describe("ListPage", () => {
 
     mockListarDragoes.mockResolvedValue(dragoesMock);
 
-    render(<ListPage />);
+    renderWithProviders(<ListPage />);
 
     const cards = await screen.findAllByTestId("dragon-card");
 
