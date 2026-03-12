@@ -1,8 +1,10 @@
-.btn-base {
+  .btn-base {
   padding: 6px 12px;
-  border-radius: 4px;
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
+  border: none;
 }
 
 .primary {

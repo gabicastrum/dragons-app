@@ -25,7 +25,7 @@ function RegisterPage() {
   const [form, setForm] = useState<FormState>(FORM_INICIAL);
   const navigate = useNavigate();
   const [feedback, setFeedback] = useState<{
-    type: "success" | "error";
+    tipo: "success" | "error";
     message: string;
   } | null>(null);
 
@@ -62,7 +62,7 @@ function RegisterPage() {
     setFeedback(null);
 
     if (!form.name.trim() || !form.type.trim()) {
-      setFeedback({ type: "error", message: "Nome e tipo são obrigatórios." });
+      setFeedback({ tipo: "error", message: "Nome e tipo são obrigatórios." });
       return;
     }
 
@@ -76,13 +76,13 @@ function RegisterPage() {
     try {
       await cadastrarDragao(payload);
       setFeedback({
-        type: "success",
+        tipo: "success",
         message: `Dragão "${payload.name}" cadastrado com sucesso!`,
       });
       setForm(FORM_INICIAL);
     } catch {
       setFeedback({
-        type: "error",
+        tipo: "error",
         message: "Erro ao cadastrar o dragão. Tente novamente.",
       });
     }
@@ -93,12 +93,14 @@ function RegisterPage() {
       <Header />
       <main className="container">
         <section className="register-card">
-          <Button type="button" className="btn--return" onClick={() => navigate("/dragoes")}>
-            <span className="btn--return__arrow">&larr;</span>
-          <h1>Realize o cadastro do seu dragão:</h1>
+          <div className="register-card-tittle">
+            <Button type="button" className="btn-return" onClick={() => navigate("/dragoes")}>
+              <span className="btn-return__arrow">&larr;</span>
             </Button>
+            <h1>Realize o cadastro do seu dragão:</h1>
+          </div>
           {feedback && (
-            <div className={`feedback feedback--${feedback.type}`}>
+            <div className={`feedback feedback-${feedback.tipo}`}>
               {feedback.message}
             </div>
           )}
@@ -152,7 +154,7 @@ function RegisterPage() {
                 />
                 <button
                   type="button"
-                  className="btn btn--secondary"
+                  className="btn btn-add"
                   onClick={adicionarHistoria}
                   disabled={!form.novaHistoria.trim()}
                 >
@@ -183,7 +185,7 @@ function RegisterPage() {
               </ul>
             )}
 
-            <Button type="submit" className="btn btn--primary">Cadastrar Dragão</Button>
+            <Button type="submit" className="btn btn-cadastro">Cadastrar Dragão</Button>
           </form>
         </section>
       </main>
