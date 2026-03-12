@@ -2,4 +2,40 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 70%;
+}
+
+.list-header {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.list-tittle {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  flex-direction: column;
+}
+
+.btn-register {
+  width: 50%;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 1rem;
+}
+
+.btn-register:hover:not(:disabled) {
+  background: #885d41;
+}
+
+.btn-register-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

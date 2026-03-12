@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import ListPage from "./ListPage";
 import { type IDragon } from "../../interfaces/dragon";
-import { renderWithProviders } from "../../test/utils/customRender";
+import { renderWithProviders } from "../../test/utils/CustomRender";
 
 const mockListarDragoes = vi.fn();
 

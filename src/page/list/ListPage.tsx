@@ -29,8 +29,15 @@ function ListPage() {
   return (
     <div>
       <Header />
-      <Button onClick={() => navigate("/cadastro")}>Cadastre aqui o seu dragão</Button>
       <main className="container">
+        <div className="list-header">
+          <div className="list-tittle">
+            <h1>Lista de Dragões</h1>
+          </div>
+        </div>
+        <div className="btn-register-container">
+          <Button className="btn-register" onClick={() => navigate("/cadastro")}>Cadastre aqui o seu dragão</Button>
+        </div>
         <hr className="divider" />
         <section className="cardSection">
           {dragoes.map((dragao) => (

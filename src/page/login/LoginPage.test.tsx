@@ -1,7 +1,7 @@
 import { screen, fireEvent, act } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import LoginPage from "./LoginPage";
-import { renderWithProviders } from "../../test/utils/customRender";
+import { renderWithProviders } from "../../test/utils/CustomRender";
 
 const mockLogin = vi.fn();
 const mockNavigate = vi.fn();

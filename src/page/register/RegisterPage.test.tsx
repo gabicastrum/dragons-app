@@ -2,7 +2,7 @@ import { screen, fireEvent, waitFor } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import RegisterPage from "./RegisterPage";
 import { cadastrarDragao } from "../../services/dragonService";
-import { renderWithProviders } from "../../test/utils/customRender";
+import { renderWithProviders } from "../../test/utils/CustomRender";
 
 
 const mockNavigate = vi.fn();

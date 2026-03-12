@@ -33,3 +33,30 @@
   border-top: 1px solid #edf2f7;
   padding-top: 1rem;
 }
+
+.btn-edit {
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  background: #85512e;
+}
+
+.btn-edit:hover:not(:disabled) {
+  background: #885d41;
+}
+.btn-delete {
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  background: #a33e3e;
+}
+
+.btn-delete:hover:not(:disabled) {
+  background: #e28383;
+}
+.icon-edit {
+  display: inline-block;
+  transform: rotate(45deg);
+}
