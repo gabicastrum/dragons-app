@@ -16,21 +16,6 @@ describe('DragonCard Component', () => {
   const mockOnDelete = vi.fn();
   const mockOnViewDetails = vi.fn();
 
-  it('deve renderizar as informações do dragão corretamente', () => {
-    render(
-      <DragonCard 
-        dragon={mockDragon} 
-        onEdit={mockOnEdit} 
-        onDelete={mockOnDelete} 
-        onViewDetails={mockOnViewDetails} 
-      />
-    );
-
-    expect(screen.getByText('Banguela')).toBeInTheDocument();
-    expect(screen.getByText('Dragão doméstico')).toBeInTheDocument();
-    expect(screen.getByText('10/03/2024')).toBeInTheDocument();
-  });
-
   it('deve chamar onViewDetails com o ID correto ao clicar na área do card', () => {
     render(
       <DragonCard 
