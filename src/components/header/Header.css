@@ -1,6 +1,6 @@
 .header {
-    background-color: rgb(206, 81, 8);
-    border-bottom: 1px solid rgb(120, 2, 255);
+    background-color: rgb(231, 161, 104);
+    border-bottom: 1px solid var(--primary);
     padding: 1rem 0;
 }
 
@@ -9,15 +9,12 @@
   align-items: center;
   text-decoration: none;
   gap: 12px;
+  font-size: 1rem;
+  color: var(--primary);
 }
 
 .logo-img {
   width: 40px;
   height: 40px;
   border-radius: 4px;
-}
-
-.logo-titulo h1 {
-  font-size: 1.25rem;
-  color: var(--primary);
 }

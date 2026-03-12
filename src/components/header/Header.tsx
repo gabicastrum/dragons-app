@@ -1,5 +1,4 @@
 import  './Header.css'
-import logoImg from '../../assets/logo.jpg';
 
 export function Header() {
     return (
@@ -7,8 +6,7 @@ export function Header() {
             <div className="container">
             <div>
                 <a href="/" className="logo-titulo">
-                <img src={logoImg} alt="Logo" className="logo-img" />
-                    <h1>Dragões App</h1>
+                    <h1>Dragons App</h1>
                 </a>
             </div>
             </div>
