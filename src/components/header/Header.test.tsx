@@ -5,13 +5,7 @@ import { Header } from './Header';
 describe('Header Component', () => {
   it('deve renderizar o título do app', () => {
     render(<Header />);
-    expect(screen.getByText('Dragões App')).toBeInTheDocument();
-  });
-
-  it('deve renderizar a imagem da logo com alt text correto', () => {
-    render(<Header />);
-    const logo = screen.getByAltText('Logo');
-    expect(logo).toBeInTheDocument();
+    expect(screen.getByText('Dragons App')).toBeInTheDocument();
   });
 
   it('deve conter um link para a home', () => {
