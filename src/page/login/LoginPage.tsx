@@ -59,7 +59,7 @@ export default function LoginPage() {
             <Input
               label="Senha"
               type="password"
-              placeholder="SenhaForte@123"
+              placeholder="senha"
               value={password}
               onChange={handlePasswordChange}
             />
