@@ -4,14 +4,17 @@ import { useAuth } from "../../hooks/useAuth";
 import { Input } from "../../components/input/Input";
 import { Header } from "../../components/header/Header";
 import { Button } from "../../components/button/Button";
+import "./LoginPage.css";
 
 export default function LoginPage() {
 
   const { login } = useAuth();
   const navigate = useNavigate();
-
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
+  const [error, setError] = useState("");
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -23,23 +26,27 @@ export default function LoginPage() {
 
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-
-    const success = login(email, password);
-
-    if (success) {
+    
+    const sucesso = login(email, password);
+    
+    if (sucesso) {
       navigate("/dragoes");
     } else {
-      alert("Usuário ou senha inválidos");
+      setError("Usuário ou senha inválidos");
+      setTimeout(() => {
+        setError("");
+      }, 1500)
     }
   };
 
   return (
-    <div>
-      <Header />
+  <div>
+    <Header />
+    {error && <div className="toast">{error}</div>}
       <main className="container">
-        <section>
-          <h1>Bem-vindo ao App dos Dragões!</h1>
-          <form onSubmit={handleSubmit}>
+      <section className="login-card">
+        <h1>Bem-vindo ao Sistema de Gerenciamento de Dragões!</h1>
+        <form className="login-form" onSubmit={handleSubmit}>
 
             <Input
               label="E-mail"
