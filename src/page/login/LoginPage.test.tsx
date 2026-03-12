@@ -1,6 +1,7 @@
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { screen, fireEvent, act } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import LoginPage from "./LoginPage";
+import { renderWithProviders } from "../../test/utils/customRender";
 
 const mockLogin = vi.fn();
 const mockNavigate = vi.fn();
@@ -11,9 +12,14 @@ vi.mock("../../hooks/useAuth", () => ({
   })
 }));
 
-vi.mock("react-router-dom", () => ({
-  useNavigate: () => mockNavigate
-}));
+vi.mock("react-router-dom", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("react-router-dom")>();
+
+  return {
+    ...actual,
+    useNavigate: () => mockNavigate,
+  };
+});
 
 const PLACEHOLDER_EMAIL = "exemplo@dragao.com";
 const PLACEHOLDER_SENHA = "senha";
@@ -38,7 +44,7 @@ describe("LoginPage", () => {
   });
 
   it("deve renderizar os campos de login", () => {
-    render(<LoginPage />);
+    renderWithProviders(<LoginPage />);
 
     expect(screen.getByPlaceholderText(PLACEHOLDER_EMAIL)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(PLACEHOLDER_SENHA)).toBeInTheDocument();
@@ -46,7 +52,7 @@ describe("LoginPage", () => {
   });
 
   it("deve atualizar os inputs quando o usuário digitar", () => {
-    render(<LoginPage />);
+    renderWithProviders(<LoginPage />);
 
     const campoEmail = screen.getByPlaceholderText(PLACEHOLDER_EMAIL);
     const campoSenha = screen.getByPlaceholderText(PLACEHOLDER_SENHA);
@@ -61,7 +67,7 @@ describe("LoginPage", () => {
   it("deve chamar login com email e senha", () => {
     mockLogin.mockReturnValue(true);
 
-    render(<LoginPage />);
+    renderWithProviders(<LoginPage />);
 
     const campoEmail = screen.getByPlaceholderText(PLACEHOLDER_EMAIL);
     const campoSenha = screen.getByPlaceholderText(PLACEHOLDER_SENHA);
@@ -77,7 +83,7 @@ describe("LoginPage", () => {
   it("deve navegar para a página de dragões quando login for sucesso", () => {
     mockLogin.mockReturnValue(true);
 
-    render(<LoginPage />);
+    renderWithProviders(<LoginPage />);
 
     const campoEmail = screen.getByPlaceholderText(PLACEHOLDER_EMAIL);
     const campoSenha = screen.getByPlaceholderText(PLACEHOLDER_SENHA);
@@ -94,7 +100,7 @@ it("deve exibir mensagem de erro quando login falhar", () => {
   vi.useFakeTimers();
   mockLogin.mockReturnValue(false);
 
-  render(<LoginPage />);
+  renderWithProviders(<LoginPage />);
 
   const campoEmail = screen.getByPlaceholderText(PLACEHOLDER_EMAIL);
   const campoSenha = screen.getByPlaceholderText(PLACEHOLDER_SENHA);
