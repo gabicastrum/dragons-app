@@ -6,3 +6,8 @@ export const listarDragoes = async (): Promise<IDragon[]> => {
   const response = await axios.get(API_URL);
   return response.data;
 };
+
+export const cadastrarDragao = async (dragao: Omit<IDragon, "id">): Promise<IDragon> => {
+  const response = await axios.post(API_URL, dragao);
+  return response.data;
+};

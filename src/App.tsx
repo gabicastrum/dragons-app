@@ -3,6 +3,7 @@ import LoginPage from './page/login/LoginPage';
 import ListPage from './page/list/ListPage';
 import { AuthProvider } from './contexts/AuthProvider';
 import { PrivateRoute } from './routes/PrivateRoutes';
+import RegisterPage from './page/register/RegisterPage';
 
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/dragoes" element={ <PrivateRoute><ListPage /></PrivateRoute>} />
+        <Route path="/cadastro" element={ <PrivateRoute><RegisterPage /></PrivateRoute>} />
+
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       </AuthProvider>
