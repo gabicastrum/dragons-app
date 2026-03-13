@@ -18,10 +18,10 @@ export function DragonCard({ dragon, onEdit, onDelete, onViewDetails }: DragonCa
       </div>
 
       <div className= "actions">
-        <Button className="btn-edit" variante="primary" onClick={() => onEdit(dragon.id)}>
+        <Button className="btn-edit" variante="primary" aria-label="Editar" onClick={() => onEdit(dragon.id)}>
           <span className="icon-edit">&#x270F;</span>
         </Button>
-        <Button className="btn-delete" variante="danger" onClick={() => onDelete(dragon.id)}>
+        <Button className="btn-delete" variante="danger" aria-label="Excluir" onClick={() => onDelete(dragon.id)}>
           &#x2715;
         </Button>
       </div>
