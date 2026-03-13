@@ -1,73 +1,74 @@
-# React + TypeScript + Vite
+# 🐉 Dragon APP — Desafio React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Aplicação frontend desenvolvida em React para gerenciamento de dragões, consumindo uma API com as operações CRUD.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tecnologias Utilizadas
 
-## React Compiler
+| Tecnologia | Descrição |
+|---|---|
+| ⚛️ **React** | Biblioteca principal para construção da interface |
+| 🪝 **React Hooks** | Controle de estados e efeitos colaterais |
+| 🛣️ **React Router DOM** | Gerenciamento de rotas da aplicação |
+| 🟦 **TypeScript** | Tipagem estática |
+| 🌐 **HTML & CSS** | Estrutura e estilização da interface |
+| ⚡ **Vite** | Ferramenta de build |
+| 🧪 **Vitest** | Framework de testes unitários |
+| 🧰 **React Testing Library** | Simulação de interação do usuário nos testes |
+| ✅ **Jest-DOM** | Extensão para verificações de elementos do DOM |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📡 Endpoints Implementados
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Todos os endpoints da API foram implementados e integrados na aplicação:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Método | Endpoint | Descrição |
+|---|---|---|
+| `GET` | `/api/v1/dragon` | Lista todos os dragões |
+| `GET` | `/api/v1/dragon/:id` | Retorna os detalhes de um dragão específico |
+| `POST` | `/api/v1/dragon` | Cria um novo dragão |
+| `PUT` | `/api/v1/dragon/:id` | Edita os dados de um dragão existente |
+| `DELETE` | `/api/v1/dragon/:id` | Remove um dragão |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## ⚙️ Como Rodar o Projeto
+
+### Pré-requisitos
+
+- Node.js instalado
+- npm
+
+### Instalação
+
+```bash
+# Clone o repositório
+git clone https://github.com/gabicastrum/dragons-app.git
+
+# Acesse a pasta do projeto
+cd dragons-app
+
+# Instale as dependências
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Scripts Disponíveis
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Inicia o servidor de desenvolvimento
+npm run dev
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Executa os testes
+npm run test
+
+# Gera o relatório de cobertura de testes
+npm run coverage
+
+# Abre a interface visual do Vitest
+npm run test:ui
 ```
+---
+
+<p align="center">Feito com apoio de ☕ por <strong> 👩‍💻 Gabriela de Castro Laurindo</strong></p>
