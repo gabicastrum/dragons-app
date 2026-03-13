@@ -39,3 +39,6 @@
   align-items: center;
   justify-content: center;
 }
+
+.toast-success { background-color: #22c55e; }
+.toast-error   { background-color: #ef4444; }

@@ -21,3 +21,7 @@ export const atualizarDragao = async (id: string, dragao: Omit<IDragon, "id">): 
   const response = await axios.put(`${API_URL}/${id}`, dragao);
   return response.data;
 };
+
+export const deletarDragao = async (id: string): Promise<void> => {
+  await axios.delete(`${API_URL}/${id}`);
+};

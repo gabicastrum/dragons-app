@@ -1,0 +1,37 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.btn-cancel {
+  background-color: rgb(231, 161, 104);
+}
+
+.btn-cancel:hover {
+  background-color: var(--primary);
+}
+
+.btn-excluir:hover {
+    background-color: rgb(243, 108, 108);
+}
