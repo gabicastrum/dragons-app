@@ -1,7 +1,7 @@
 .header {
-  background-color: rgb(231, 161, 104);
+  background-color: rgb(255 235 218);
   border-bottom: 1px solid var(--primary);
-  padding: 0.25rem 5rem;
+  padding: 1.25rem 5rem;
   display: grid;
   grid-template-columns: 1fr auto;
   place-items: center

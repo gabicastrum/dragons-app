@@ -4,6 +4,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { Input } from "../../components/input/Input";
 import { Header } from "../../components/header/Header";
 import { Button } from "../../components/button/Button";
+import { Footer } from "../../components/footer/Footer";
 import "./LoginPage.css";
 
 export default function LoginPage() {
@@ -40,10 +41,10 @@ export default function LoginPage() {
   };
 
   return (
-  <div>
+  <div className="page-wrapper">
     <Header />
     {error && <div className="toast">{error}</div>}
-      <main className="container">
+      <main className="container-login">
       <section className="login-card">
         <h1>Bem-vindo ao Sistema de Gerenciamento de Dragões!</h1>
         <form className="login-form" onSubmit={handleSubmit}>
@@ -74,6 +75,7 @@ export default function LoginPage() {
           </form>
         </section>
       </main>
+      <Footer/>
     </div>
   );
 }
