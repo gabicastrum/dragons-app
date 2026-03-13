@@ -25,7 +25,7 @@ function ListPage() {
 
   const showToast = (tipo: "success" | "error", message: string) => {
     setToast({ tipo, message });
-    setTimeout(() => setToast(null), 1500);
+    setTimeout(() => setToast(null), 2000);
   };
 
   const handleDelete = async () => {
@@ -33,9 +33,9 @@ function ListPage() {
     try {
       await deletarDragao(idParaDeletar);
       setDragoes((prev) => prev.filter((d) => d.id !== idParaDeletar));
-      showToast("success", "Dragão excluído com sucesso!");
+      showToast("success", "Dragão deletado com sucesso!");
     } catch {
-      showToast("error", "Erro ao excluir o dragão. Tente novamente.");
+      showToast("error", "Erro ao deletar o dragão. Tente novamente.");
     } finally {
       setIdParaDeletar(null);
     }
@@ -82,7 +82,7 @@ function ListPage() {
         </section>
           {idParaDeletar && (
             <ConfirmModal
-            mensagem="Tem certeza que deseja excluir este dragão?"
+            mensagem="Tem certeza que deseja deletar este dragão?"
             onConfirm={handleDelete}
             onCancel={() => setIdParaDeletar(null)}
               />
