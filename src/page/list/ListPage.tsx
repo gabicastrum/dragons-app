@@ -7,7 +7,6 @@ import { Button } from "../../components/button/Button";
 import "./ListPage.css"
 import { useNavigate } from "react-router-dom";
 
-const handleEdit = (id: string) => console.log("Editando:", id);
 const handleDelete = (id: string) => console.log("Excluindo:", id);
 
 function ListPage() {
@@ -17,6 +16,11 @@ function ListPage() {
   const handleViewDetails = (id: string) => {
     navigate(`/dragoes/${id}`)
   }
+  
+  const handleEdit = (id: string) => {
+    navigate(`/dragoes/${id}/editar`)
+  };
+
   useEffect(() => {
     async function carregarDragoes() {
       const data = await listarDragoes();
