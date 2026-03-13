@@ -1,0 +1,120 @@
+import { useEffect, useState } from "react";
+import { Header } from "../../components/header/Header";
+import { type IDragon } from "../../interfaces/dragon";
+import { buscarDragaoPorId } from "../../services/dragonService";
+import { Button } from "../../components/button/Button";
+import { useNavigate, useParams } from "react-router-dom";
+import "./DetailsPage.css";
+
+function DetailsPage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [dragon, setDragon] = useState<IDragon | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  
+  useEffect(() => {
+      const carregarDragao = async () => {
+      try {
+        if (!id) return;
+
+        const data = await buscarDragaoPorId(id);
+        setDragon(data);
+    } catch (error) {
+        console.error("Erro ao buscar dragão", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    carregarDragao();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div>
+        <Header />
+        <main className="container">
+          <section className="register-card">
+            <p>Carregando dragão...</p>
+          </section>
+        </main>
+      </div>
+    );
+  }
+
+  if (!dragon) {
+    return (
+      <div>
+        <Header />
+        <main className="container">
+          <section className="register-card">
+            <p>Dragão não encontrado.</p>
+          </section>
+        </main>
+      </div>
+    );
+}
+    const historias = Array.isArray(dragon.histories)
+    ? dragon.histories
+    : dragon.histories
+    ? [dragon.histories]
+    : [];
+
+  return (
+    <div>
+      <Header />
+
+      <main className="container">
+        <section className="register-card">
+
+          <div className="register-card-tittle">
+            <Button
+              type="button"
+              className="btn--return"
+              onClick={() => navigate("/dragoes")}
+            >
+              <span className="btn--return__arrow">&larr;</span>
+            </Button>
+
+            <h1>Detalhes do Dragão</h1>
+          </div>
+
+          <div className="field">
+            <label>Nome do Dragão</label>
+            <span>{dragon.name}</span>
+          </div>
+
+          <div className="field">
+            <label>Tipo</label>
+            <span>{dragon.type}</span>
+          </div>
+
+          <div className="field">
+            <label>Data de Cadastro</label>
+            <span>
+              {new Date(dragon.createdAt).toLocaleString("pt-BR")}
+            </span>
+          </div>
+          
+          <div className="field">
+            <label>Histórias</label>
+        </div>
+        
+        {historias.length > 0 ? (
+            <ul className="history-list">
+                {historias.map((h, i) => (
+                    <li key={i}><span>{h}</span></li>
+                    ))}
+                    </ul>
+                    ) : (
+                    <span>Este dragão ainda não possui histórias.</span>
+                    )}
+        </section>
+      </main>
+    </div>
+  );
+}
+
+export default DetailsPage;

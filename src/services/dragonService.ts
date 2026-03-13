@@ -11,3 +11,8 @@ export const cadastrarDragao = async (dragao: Omit<IDragon, "id">): Promise<IDra
   const response = await axios.post(API_URL, dragao);
   return response.data;
 };
+
+export const buscarDragaoPorId = async (id: string): Promise<IDragon> => {
+  const response = await axios.get(`${API_URL}/${id}`);
+  return response.data;
+};
