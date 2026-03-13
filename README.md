@@ -32,6 +32,11 @@ Todos os endpoints da API foram implementados e integrados na aplicação:
 | `PUT` | `/api/v1/dragon/:id` | Edita os dados de um dragão existente |
 | `DELETE` | `/api/v1/dragon/:id` | Remove um dragão |
 
+### 🚣🏽‍♀️ Acesso para navegar no sistema: 
+
+- E-mail: admin@dragoes.com
+- Senha: SenhaForte@123
+
 ---
 
 ## ⚙️ Como Rodar o Projeto
