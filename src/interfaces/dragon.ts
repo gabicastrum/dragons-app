@@ -3,5 +3,5 @@ export interface IDragon {
   name: string;
   type: string;
   createdAt: string;
-  histories: string[];
+  histories: string[] | string;
 }

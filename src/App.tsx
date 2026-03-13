@@ -5,6 +5,7 @@ import { AuthProvider } from './contexts/AuthProvider';
 import { PrivateRoute } from './routes/PrivateRoutes';
 import RegisterPage from './page/register/RegisterPage';
 import DetailsPage from './page/details/DetailsPage';
+import EditPage from './page/edit/EditPage';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/dragoes" element={ <PrivateRoute><ListPage /></PrivateRoute>} />
         <Route path="/cadastro" element={ <PrivateRoute><RegisterPage /></PrivateRoute>} />
         <Route path="/dragoes/:id" element={ <PrivateRoute><DetailsPage /></PrivateRoute>} />
+        <Route path="/dragoes/:id/editar" element={ <PrivateRoute><EditPage /></PrivateRoute>} />
         
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
