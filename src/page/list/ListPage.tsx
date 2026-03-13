@@ -9,12 +9,14 @@ import { useNavigate } from "react-router-dom";
 
 const handleEdit = (id: string) => console.log("Editando:", id);
 const handleDelete = (id: string) => console.log("Excluindo:", id);
-const handleViewDetails = (id: string) => console.log("Detalhes:", id);
 
 function ListPage() {
   const [dragoes, setDragoes] = useState<IDragon[]>([]);
   const navigate = useNavigate();
-
+  
+  const handleViewDetails = (id: string) => {
+    navigate(`/dragoes/${id}`)
+  }
   useEffect(() => {
     async function carregarDragoes() {
       const data = await listarDragoes();
@@ -38,16 +40,16 @@ function ListPage() {
         <div className="btn-register-container">
           <Button className="btn-register" onClick={() => navigate("/cadastro")}>Cadastre aqui o seu dragão</Button>
         </div>
-        <hr className="divider" />
-        <section className="cardSection">
+       <section className="cardSection">
           {dragoes.map((dragao) => (
             <DragonCard
-            key={dragao.id}
-            dragon={dragao}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-            onViewDetails={handleViewDetails}
-            />))}
+              key={dragao.id}
+              dragon={dragao}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              onViewDetails={handleViewDetails}
+            />
+          ))}
         </section>
       </main>
     </div>
