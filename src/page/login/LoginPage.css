@@ -1,8 +1,15 @@
-.container {
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-login {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 2rem 20px;
 }
 
 .login-card {
