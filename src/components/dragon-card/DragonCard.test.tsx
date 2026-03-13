@@ -42,7 +42,7 @@ describe('DragonCard Component', () => {
       />
     );
 
-    const editButton = screen.getByRole('button', { name: /editar/i });
+    const editButton = screen.getByLabelText("Editar");
     fireEvent.click(editButton);
 
     expect(mockOnEdit).toHaveBeenCalledWith('dragon-123');
@@ -58,7 +58,7 @@ describe('DragonCard Component', () => {
       />
     );
 
-    const deleteButton = screen.getByRole('button', { name: /excluir/i });
+    const deleteButton = screen.getByLabelText("Excluir");
     fireEvent.click(deleteButton);
 
     expect(mockOnDelete).toHaveBeenCalledWith('dragon-123');
