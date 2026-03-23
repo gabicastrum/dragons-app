@@ -7,11 +7,12 @@ import { Button } from "../../components/button/Button";
 import "./ListPage.css"
 import { useNavigate } from "react-router-dom";
 import { ConfirmModal } from "../../components/confirm-modal/ConfirmModal";
-import { EmptyState } from "./list-empty-state/ListEmptyState";
-
+import { EmptyState } from "../../components/empty-state/EmptyState";
+import { Loading } from "../../components/loading/Loading";
 
 function ListPage() {
   const [dragoes, setDragoes] = useState<IDragon[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [idParaDeletar, setIdParaDeletar] = useState<string | null>(null);
   const [toast, setToast] = useState<{ tipo: "success" | "error"; message: string } | null>(null);
   const navigate = useNavigate();
@@ -43,15 +44,27 @@ function ListPage() {
   };
 
   useEffect(() => {
-    async function carregarDragoes() {
+  async function carregarDragoes() {
+    try {
+      setLoading(true);
       const data = await listarDragoes();
-      const ordenados = data.sort((a: IDragon, b: IDragon) => 
+            const ordenados = data.sort((a: IDragon, b: IDragon) => 
         a.name.localeCompare(b.name)
-    );
-    setDragoes(ordenados);
+      );
+
+      setDragoes(ordenados);
+    } catch (error) {
+      console.error("Erro ao carregar os dragões:", error);
+    } finally {
+      setLoading(false);
+    }
   }
   carregarDragoes();
 }, []);
+
+if (loading) {
+    return <Loading message="Buscando dragões..." />;
+  }
 
   return (
     <div>

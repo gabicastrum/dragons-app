@@ -5,6 +5,8 @@ import { buscarDragaoPorId } from "../../services/dragonService";
 import { Button } from "../../components/button/Button";
 import { useNavigate, useParams } from "react-router-dom";
 import "./DetailsPage.css";
+import { Loading } from "../../components/loading/Loading";
+import { EmptyState } from "../../components/empty-state/EmptyState";
 
 function DetailsPage() {
   const { id } = useParams();
@@ -18,7 +20,7 @@ function DetailsPage() {
       const carregarDragao = async () => {
       try {
         if (!id) return;
-
+        setLoading(true);
         const data = await buscarDragaoPorId(id);
         setDragon(data);
     } catch (error) {
@@ -32,16 +34,7 @@ function DetailsPage() {
   }, [id]);
 
   if (loading) {
-    return (
-      <div>
-        <Header />
-        <main className="container">
-          <section className="register-card">
-            <p>Carregando dragão...</p>
-          </section>
-        </main>
-      </div>
-    );
+    return <Loading message="Buscando detalhes do dragão..." />;
   }
 
   if (!dragon) {
@@ -49,14 +42,18 @@ function DetailsPage() {
       <div>
         <Header />
         <main className="container">
-          <section className="register-card">
-            <p>Dragão não encontrado.</p>
-          </section>
+          <EmptyState
+          title="Dragão não encontrado :("
+          description="Infelizmente não conseguimos localizar os detalhes deste dragão."
+          actionLabel="Voltar para a lista"
+          icon="🔍"
+          onAction={() => navigate("/dragoes")}
+          />
         </main>
       </div>
     );
-}
-    const historias = Array.isArray(dragon.histories)
+  }
+  const historias = Array.isArray(dragon.histories)
     ? dragon.histories
     : dragon.histories
     ? [dragon.histories]
