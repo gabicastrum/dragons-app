@@ -1,0 +1,46 @@
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 64px 24px;
+  text-align: center;
+  color: #888;
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+}
+
+.empty-state-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.empty-state-description {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.empty-state-btn-register {
+  width: 50%;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 1rem;
+}
+
+.empty-state-btn-register:hover:not(:disabled) {
+  background: #885d41;
+}
+
+.empty-state-btn-register-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -7,6 +7,7 @@ import { Button } from "../../components/button/Button";
 import "./ListPage.css"
 import { useNavigate } from "react-router-dom";
 import { ConfirmModal } from "../../components/confirm-modal/ConfirmModal";
+import { EmptyState } from "./list-empty-state/ListEmptyState";
 
 
 function ListPage() {
@@ -67,18 +68,25 @@ function ListPage() {
           </div>
         </div>
         <div className="btn-register-container">
-          <Button className="btn-register" onClick={() => navigate("/cadastro")}>Cadastre aqui o seu dragão</Button>
-        </div>
-       <section className="cardSection">
-          {dragoes.map((dragao) => (
-            <DragonCard
-              key={dragao.id}
-              dragon={dragao}
-              onEdit={handleEdit}
-              onDelete={(id) => setIdParaDeletar(id)}
-              onViewDetails={handleViewDetails}
-            />
-          ))}
+          {dragoes.length > 0 && (
+            <Button className="btn-register" onClick={() => navigate("/cadastro")}>
+              Cadastre aqui o seu dragão
+              </Button>
+            )}
+            </div>
+            <section className="cardSection">
+              {dragoes.length === 0 ? (
+                <EmptyState onAction={() => navigate("/cadastro")} />
+              ) : (
+                dragoes.map((dragao) => (
+                <DragonCard
+                key={dragao.id}
+                dragon={dragao}
+                onEdit={handleEdit}
+                onDelete={(id) => setIdParaDeletar(id)}
+                onViewDetails={handleViewDetails}
+                />
+              )))}
         </section>
           {idParaDeletar && (
             <ConfirmModal
