@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Header } from "../../components/header/Header";
 import { DragonForm } from "../../components/dragon-form/DragonForm";
 import { buscarDragaoPorId, atualizarDragao } from "../../services/dragonService";
 import { type IDragon } from "../../interfaces/dragon";
+import { Loading } from "../../components/loading/Loading";
+import { EmptyState } from "../../components/empty-state/EmptyState";
 
 function EditPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [dragon, setDragon] = useState<IDragon | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -14,6 +18,7 @@ function EditPage() {
     const carregar = async () => {
       try {
         if (!id) return;
+        setLoading(true);
         const data = await buscarDragaoPorId(id);
         setDragon(data);
       } catch (error) {
@@ -25,17 +30,17 @@ function EditPage() {
     carregar();
   }, [id]);
 
+  const handleUpdate = async (dados: Omit<IDragon, "id">) => {
+    try {
+      if (!id) return;
+      await atualizarDragao(id, dados);
+    } catch (error) {
+      console.error("Erro ao atualizar", error);
+    }
+  };
+
   if (loading) {
-    return (
-      <div>
-        <Header />
-        <main className="container">
-          <section className="register-card">
-            <p>Carregando dragão...</p>
-          </section>
-        </main>
-      </div>
-    );
+    return <Loading message="Buscando informações do dragão..." />;
   }
 
   if (!dragon) {
@@ -43,9 +48,11 @@ function EditPage() {
       <div>
         <Header />
         <main className="container">
-          <section className="register-card">
-            <p>Dragão não encontrado.</p>
-          </section>
+          <EmptyState 
+            title="Dragão não encontrado"
+            onAction={() => navigate("/dragoes")}
+            actionLabel="Voltar para a lista"
+          />
         </main>
       </div>
     );
@@ -56,9 +63,10 @@ function EditPage() {
       <Header />
       <main className="container">
         <DragonForm
-          titulo="Editar Dragão"
+          titulo="Editar detalhes do dragão"
+          mensagemSucesso="Dragão atualizado com sucesso!"
           initialData={dragon}
-          onSubmit={(dados) => atualizarDragao(id!, dados)}
+          onSubmit={handleUpdate}
         />
       </main>
     </div>
