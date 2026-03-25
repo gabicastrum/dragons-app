@@ -1,109 +1,118 @@
-import { useState } from "react";
-import { Input } from "../input/Input";
-import { Button } from "../button/Button";
-import { type IDragon } from "../../interfaces/dragon";
-import { useNavigate } from "react-router-dom";
-import "./DragonForm.css"
+import { useState } from 'react'
+import { Input } from '../input/Input'
+import { Button } from '../button/Button'
+import { type IDragon } from '../../interfaces/dragon'
+import { useNavigate } from 'react-router-dom'
+import './DragonForm.css'
 
 interface DragonFormProps {
-  titulo: string;
-  initialData?: IDragon;
-  onSubmit: (dados: Omit<IDragon, "id">) => Promise<unknown>;
-  mensagemSucesso?: string;
+  titulo: string
+  initialData?: IDragon
+  onSubmit: (dados: Omit<IDragon, 'id'>) => Promise<unknown>
+  mensagemSucesso?: string
 }
 
 interface FormState {
-  name: string;
-  type: string;
-  histories: string[];
-  novaHistoria: string;
+  name: string
+  type: string
+  histories: string[]
+  novaHistoria: string
 }
 
-export function DragonForm({ titulo, initialData, onSubmit, mensagemSucesso }: DragonFormProps) {
-  const navigate = useNavigate();
-  
+export function DragonForm({
+  titulo,
+  initialData,
+  onSubmit,
+  mensagemSucesso,
+}: DragonFormProps) {
+  const navigate = useNavigate()
+
   const [form, setForm] = useState<FormState>({
-    name: initialData?.name ?? "",
-    type: initialData?.type ?? "",
-    novaHistoria: "",
+    name: initialData?.name ?? '',
+    type: initialData?.type ?? '',
+    novaHistoria: '',
     histories: Array.isArray(initialData?.histories)
-        ? initialData.histories
-        : initialData?.histories
+      ? initialData.histories
+      : initialData?.histories
         ? [initialData.histories]
         : [],
-    });
+  })
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
   const [feedback, setFeedback] = useState<{
-    tipo: "success" | "error";
-    message: string;
-  } | null>(null);
+    tipo: 'success' | 'error'
+    message: string
+  } | null>(null)
 
   const handleChange =
-    (field: keyof Pick<FormState, "name" | "type" | "novaHistoria">) =>
+    (field: keyof Pick<FormState, 'name' | 'type' | 'novaHistoria'>) =>
     (e: React.ChangeEvent<HTMLInputElement>) =>
-      setForm((prev) => ({ ...prev, [field]: e.target.value }));
+      setForm((prev) => ({ ...prev, [field]: e.target.value }))
 
   const adicionarHistoria = () => {
-    const trimmed = form.novaHistoria.trim();
-    if (!trimmed) return;
+    const trimmed = form.novaHistoria.trim()
+    if (!trimmed) return
     setForm((prev) => ({
       ...prev,
       histories: [...prev.histories, trimmed],
-      novaHistoria: "",
-    }));
-  };
+      novaHistoria: '',
+    }))
+  }
 
   const removerHistoria = (index: number) =>
     setForm((prev) => ({
       ...prev,
       histories: prev.histories.filter((_, i) => i !== index),
-    }));
+    }))
 
   const handleHistoryKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      adicionarHistoria();
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      adicionarHistoria()
     }
-  };
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFeedback(null);
+    e.preventDefault()
+    setFeedback(null)
 
     if (!form.name.trim() || !form.type.trim()) {
-      setFeedback({ tipo: "error", message: "Nome e tipo são obrigatórios." });
-      return;
+      setFeedback({ tipo: 'error', message: 'Nome e tipo são obrigatórios.' })
+      return
     }
 
-    const payload: Omit<IDragon, "id"> = {
+    const payload: Omit<IDragon, 'id'> = {
       name: form.name.trim(),
       type: form.type.trim(),
       histories: form.histories,
       createdAt: initialData?.createdAt ?? new Date().toISOString(),
-    };
+    }
 
     try {
-      setLoading(true);
-      await onSubmit(payload);
+      setLoading(true)
+      await onSubmit(payload)
       setFeedback({
-        tipo: "success",
-        message: `Dragão "${payload.name}" ${mensagemSucesso ?? "salvo com sucesso!"}`
-      });
+        tipo: 'success',
+        message: `Dragão "${payload.name}" ${mensagemSucesso ?? 'salvo com sucesso!'}`,
+      })
     } catch {
       setFeedback({
-        tipo: "error",
-        message: "Erro ao salvar o dragão. Tente novamente.",
-      });
+        tipo: 'error',
+        message: 'Erro ao salvar o dragão. Tente novamente.',
+      })
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return (
     <section className="register-card">
       <div className="register-card-tittle">
-        <Button type="button" className="btn-return" onClick={() => navigate("/dragoes")}>
+        <Button
+          type="button"
+          className="btn-return"
+          onClick={() => navigate('/dragoes')}
+        >
           <span className="btn-return__arrow">&larr;</span>
         </Button>
         <h1>{titulo}</h1>
@@ -123,7 +132,7 @@ export function DragonForm({ titulo, initialData, onSubmit, mensagemSucesso }: D
             type="text"
             placeholder="Ex: Fúria da Noite"
             value={form.name}
-            onChange={handleChange("name")}
+            onChange={handleChange('name')}
             required
           />
         </div>
@@ -135,7 +144,7 @@ export function DragonForm({ titulo, initialData, onSubmit, mensagemSucesso }: D
             type="text"
             placeholder="Ex: Fogo, Gelo, etc"
             value={form.type}
-            onChange={handleChange("type")}
+            onChange={handleChange('type')}
             required
           />
         </div>
@@ -146,8 +155,8 @@ export function DragonForm({ titulo, initialData, onSubmit, mensagemSucesso }: D
             type="text"
             value={
               initialData
-                ? new Date(initialData.createdAt).toLocaleString("pt-BR")
-                : new Date().toLocaleString("pt-BR")
+                ? new Date(initialData.createdAt).toLocaleString('pt-BR')
+                : new Date().toLocaleString('pt-BR')
             }
             disabled
             title="Gerada automaticamente ao salvar"
@@ -163,7 +172,7 @@ export function DragonForm({ titulo, initialData, onSubmit, mensagemSucesso }: D
               type="text"
               placeholder="Ex: Nasceu na Ilha de Berk"
               value={form.novaHistoria}
-              onChange={handleChange("novaHistoria")}
+              onChange={handleChange('novaHistoria')}
               onKeyDown={handleHistoryKeyDown}
             />
             <button
@@ -175,7 +184,10 @@ export function DragonForm({ titulo, initialData, onSubmit, mensagemSucesso }: D
               + Adicionar
             </button>
           </div>
-          <span>Pressione Enter ou clique em "+ Adicionar" para inserir cada história</span>
+          <span>
+            Pressione Enter ou clique em "+ Adicionar" para inserir cada
+            história
+          </span>
         </div>
 
         {form.histories.length > 0 && (
@@ -197,9 +209,9 @@ export function DragonForm({ titulo, initialData, onSubmit, mensagemSucesso }: D
         )}
 
         <Button type="submit" className="btn btn-cadastro" disabled={loading}>
-          {loading ? "Salvando..." : "Salvar Dragão"}
+          {loading ? 'Salvando...' : 'Salvar Dragão'}
         </Button>
       </form>
     </section>
-  );
+  )
 }

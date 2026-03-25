@@ -4,7 +4,7 @@
   padding: 1.25rem 5rem;
   display: grid;
   grid-template-columns: 1fr auto;
-  place-items: center
+  place-items: center;
 }
 
 .headerActions {

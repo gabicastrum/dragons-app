@@ -1,40 +1,43 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Header } from "../../components/header/Header";
-import { DragonForm } from "../../components/dragon-form/DragonForm";
-import { buscarDragaoPorId, atualizarDragao } from "../../services/dragonService";
-import { type IDragon } from "../../interfaces/dragon";
-import { Loading } from "../../components/loading/Loading";
-import { EmptyState } from "../../components/empty-state/EmptyState";
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Header } from '../../components/header/Header'
+import { DragonForm } from '../../components/dragon-form/DragonForm'
+import {
+  buscarDragaoPorId,
+  atualizarDragao,
+} from '../../services/dragonService'
+import { type IDragon } from '../../interfaces/dragon'
+import { Loading } from '../../components/loading/Loading'
+import { EmptyState } from '../../components/empty-state/EmptyState'
 
 function EditPage() {
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const { id } = useParams()
+  const navigate = useNavigate()
 
-  const [dragon, setDragon] = useState<IDragon | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [dragon, setDragon] = useState<IDragon | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const carregar = async () => {
       try {
-        if (!id) return;
-        setLoading(true);
-        const data = await buscarDragaoPorId(id);
-        setDragon(data);
+        if (!id) return
+        setLoading(true)
+        const data = await buscarDragaoPorId(id)
+        setDragon(data)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
-    carregar();
-  }, [id]);
+    }
+    carregar()
+  }, [id])
 
-  const handleUpdate = async (dados: Omit<IDragon, "id">) => {
-  if (!id) return;
-  await atualizarDragao(id, dados);
-};
+  const handleUpdate = async (dados: Omit<IDragon, 'id'>) => {
+    if (!id) return
+    await atualizarDragao(id, dados)
+  }
 
   if (loading) {
-    return <Loading message="Buscando informações do dragão..." />;
+    return <Loading message="Buscando informações do dragão..." />
   }
 
   if (!dragon) {
@@ -42,14 +45,14 @@ function EditPage() {
       <div>
         <Header />
         <main className="container">
-          <EmptyState 
+          <EmptyState
             title="Dragão não encontrado"
-            onAction={() => navigate("/dragoes")}
+            onAction={() => navigate('/dragoes')}
             actionLabel="Voltar para a lista"
           />
         </main>
       </div>
-    );
+    )
   }
 
   return (
@@ -64,7 +67,7 @@ function EditPage() {
         />
       </main>
     </div>
-  );
+  )
 }
 
-export default EditPage;
+export default EditPage

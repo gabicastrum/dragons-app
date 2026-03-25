@@ -1,6 +1,6 @@
-import { DragonForm } from "../../components/dragon-form/DragonForm";
-import { Header } from "../../components/header/Header";
-import { cadastrarDragao } from "../../services/dragonService";
+import { DragonForm } from '../../components/dragon-form/DragonForm'
+import { Header } from '../../components/header/Header'
+import { cadastrarDragao } from '../../services/dragonService'
 
 function RegisterPage() {
   return (
@@ -14,7 +14,7 @@ function RegisterPage() {
         />
       </main>
     </div>
-  );
+  )
 }
 
-export default RegisterPage;
+export default RegisterPage

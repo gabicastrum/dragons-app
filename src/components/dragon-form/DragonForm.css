@@ -1,10 +1,10 @@
- .register-card {
-    background: white;
-    margin: 2.5rem auto;
-    border-radius: 12px;
-    padding: 2rem 2.5rem;
-    max-width: 560px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+.register-card {
+  background: white;
+  margin: 2.5rem auto;
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  max-width: 560px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
 .register-card-tittle {
@@ -17,9 +17,9 @@
   font-size: 1.5rem;
   display: grid;
   grid-template-columns: 1fr auto;
-  place-items: center
+  place-items: center;
 }
-  
+
 .field {
   display: flex;
   flex-direction: column;
@@ -89,16 +89,16 @@
 .btn-cadastro:hover:not(:disabled) {
   background: #885d41;
 }
- 
+
 .btn-add {
   background: #ffece0;
   color: #683b00;
   white-space: nowrap;
-  margin-bottom: 16px
+  margin-bottom: 16px;
 }
- 
+
 .btn-add:hover:not(:disabled) {
-    background: #e0cdc1;
+  background: #e0cdc1;
 }
 
 .btn-return {
@@ -112,10 +112,9 @@
   width: 10%;
 }
 
-.btn-return__arrow{
+.btn-return__arrow {
   font-size: 1.8rem;
   line-height: 1;
-
 }
 
 .feedback {

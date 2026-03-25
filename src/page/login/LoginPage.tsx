@@ -1,54 +1,52 @@
-import { useState, type SubmitEventHandler, type ChangeEvent } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
-import { Input } from "../../components/input/Input";
-import { Header } from "../../components/header/Header";
-import { Button } from "../../components/button/Button";
-import { Footer } from "../../components/footer/Footer";
-import "./LoginPage.css";
+import { useState, type SubmitEventHandler, type ChangeEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/useAuth'
+import { Input } from '../../components/input/Input'
+import { Header } from '../../components/header/Header'
+import { Button } from '../../components/button/Button'
+import { Footer } from '../../components/footer/Footer'
+import './LoginPage.css'
 
 export default function LoginPage() {
+  const { login } = useAuth()
+  const navigate = useNavigate()
 
-  const { login } = useAuth();
-  const navigate = useNavigate();
-  
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const [error, setError] = useState('')
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
+    setEmail(event.target.value)
+  }
 
   const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
+    setPassword(event.target.value)
+  }
 
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
-    
-    const sucesso = login(email, password);
-    
+    event.preventDefault()
+
+    const sucesso = login(email, password)
+
     if (sucesso) {
-      navigate("/dragoes");
+      navigate('/dragoes')
     } else {
-      setError("Usuário ou senha inválidos");
+      setError('Usuário ou senha inválidos')
       setTimeout(() => {
-        setError("");
+        setError('')
       }, 1500)
     }
-  };
+  }
 
   return (
-  <div className="page-wrapper">
-    <Header />
-    {error && <div className="toast">{error}</div>}
+    <div className="page-wrapper">
+      <Header />
+      {error && <div className="toast">{error}</div>}
       <main className="container-login">
-      <section className="login-card">
-        <h1>Bem-vindo ao Sistema de Gerenciamento de Dragões!</h1>
-        <form className="login-form" onSubmit={handleSubmit}>
-
+        <section className="login-card">
+          <h1>Bem-vindo ao Sistema de Gerenciamento de Dragões!</h1>
+          <form className="login-form" onSubmit={handleSubmit}>
             <Input
               label="E-mail"
               type="email"
@@ -65,17 +63,13 @@ export default function LoginPage() {
               onChange={handlePasswordChange}
             />
 
-            <Button
-              type="submit"
-              variante="primary"
-            >
+            <Button type="submit" variante="primary">
               Entrar
             </Button>
-
           </form>
         </section>
       </main>
-      <Footer/>
+      <Footer />
     </div>
-  );
+  )
 }
