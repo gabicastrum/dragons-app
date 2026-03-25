@@ -21,8 +21,6 @@ function EditPage() {
         setLoading(true);
         const data = await buscarDragaoPorId(id);
         setDragon(data);
-      } catch (error) {
-        console.error("Erro ao buscar dragão", error);
       } finally {
         setLoading(false);
       }
@@ -31,13 +29,9 @@ function EditPage() {
   }, [id]);
 
   const handleUpdate = async (dados: Omit<IDragon, "id">) => {
-    try {
-      if (!id) return;
-      await atualizarDragao(id, dados);
-    } catch (error) {
-      console.error("Erro ao atualizar", error);
-    }
-  };
+  if (!id) return;
+  await atualizarDragao(id, dados);
+};
 
   if (loading) {
     return <Loading message="Buscando informações do dragão..." />;

@@ -11,6 +11,7 @@ import { EmptyState } from "../../components/empty-state/EmptyState";
 function DetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [error, setError] = useState(false);
 
   const [dragon, setDragon] = useState<IDragon | null>(null);
   const [loading, setLoading] = useState(true);
@@ -21,10 +22,12 @@ function DetailsPage() {
       try {
         if (!id) return;
         setLoading(true);
+        setError(false);
+      
         const data = await buscarDragaoPorId(id);
         setDragon(data);
-    } catch (error) {
-        console.error("Erro ao buscar dragão", error);
+     } catch {
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -35,6 +38,23 @@ function DetailsPage() {
 
   if (loading) {
     return <Loading message="Buscando detalhes do dragão..." />;
+  }
+
+  if (error) {
+  return (
+    <div>
+      <Header />
+      <main className="container">
+        <EmptyState
+          title="Erro ao carregar dragão"
+          description="Tente novamente mais tarde."
+          actionLabel="Voltar para a lista"
+          icon="⚠️"
+          onAction={() => navigate("/dragoes")}
+        />
+      </main>
+    </div>
+    );
   }
 
   if (!dragon) {

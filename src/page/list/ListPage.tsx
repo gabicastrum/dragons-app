@@ -14,6 +14,7 @@ function ListPage() {
   const [dragoes, setDragoes] = useState<IDragon[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [idParaDeletar, setIdParaDeletar] = useState<string | null>(null);
+  const [error, setError] = useState(false);
   const [toast, setToast] = useState<{ tipo: "success" | "error"; message: string } | null>(null);
   const navigate = useNavigate();
   
@@ -47,14 +48,19 @@ function ListPage() {
   async function carregarDragoes() {
     try {
       setLoading(true);
+      setError(false);
+
       const data = await listarDragoes();
-            const ordenados = data.sort((a: IDragon, b: IDragon) => 
+
+      const ordenados = [...data].sort((a, b) =>
         a.name.localeCompare(b.name)
       );
 
       setDragoes(ordenados);
-    } catch (error) {
-      console.error("Erro ao carregar os dragões:", error);
+
+    } catch {
+      setError(true);
+
     } finally {
       setLoading(false);
     }
@@ -65,6 +71,20 @@ function ListPage() {
 if (loading) {
     return <Loading message="Buscando dragões..." />;
   }
+
+  if (error) {
+  return (
+    <div>
+      <Header />
+      <main className="container">
+        <EmptyState
+          title="Erro ao carregar dragões"
+          description="Tente novamente mais tarde."
+        />
+      </main>
+    </div>
+  );
+}
 
   return (
     <div>
