@@ -137,4 +137,54 @@ describe('DragonForm', () => {
 
     expect(mockNavigate).toHaveBeenCalledWith('/dragoes')
   })
+
+  it('deve adicionar uma história ao pressionar a tecla Enter', () => {
+    renderForm()
+
+    const campoHistoria = screen.getByPlaceholderText(PLACEHOLDER_HISTORIA)
+
+    fireEvent.change(campoHistoria, { target: { value: 'História via Enter' } })
+    fireEvent.keyDown(campoHistoria, {
+      key: 'Enter',
+      code: 'Enter',
+      charCode: 13,
+    })
+
+    expect(screen.getByText('História via Enter')).toBeInTheDocument()
+    expect(campoHistoria).toHaveValue('')
+  })
+
+  it('não deve adicionar uma história se o campo estiver apenas com espaços', () => {
+    renderForm()
+
+    const campoHistoria = screen.getByPlaceholderText(PLACEHOLDER_HISTORIA)
+
+    fireEvent.change(campoHistoria, { target: { value: '   ' } })
+    fireEvent.click(screen.getByRole('button', { name: BOTAO_ADICIONAR }))
+
+    const lista = screen.queryByRole('list')
+    expect(lista).not.toBeInTheDocument()
+  })
+
+  it('deve carregar com dados iniciais quando fornecidos', () => {
+    const dadosIniciais = {
+      id: '1',
+      name: 'Dragão Antigo',
+      type: 'Fogo',
+      createdAt: new Date().toISOString(),
+      histories: ['História 1'],
+    }
+
+    renderWithProviders(
+      <DragonForm
+        titulo="Editar"
+        onSubmit={mockSubmit}
+        initialData={dadosIniciais}
+      />
+    )
+
+    expect(screen.getByDisplayValue('Dragão Antigo')).toBeInTheDocument()
+    expect(screen.getByDisplayValue('Fogo')).toBeInTheDocument()
+    expect(screen.getByText('História 1')).toBeInTheDocument()
+  })
 })

@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import LoginPage from './page/login/LoginPage'
 import ListPage from './page/list/ListPage'
-import { AuthProvider } from './contexts/AuthProvider'
+import { AuthProvider } from './contexts/auth/AuthProvider'
 import { PrivateRoute } from './routes/PrivateRoutes'
 import RegisterPage from './page/register/RegisterPage'
 import DetailsPage from './page/details/DetailsPage'
